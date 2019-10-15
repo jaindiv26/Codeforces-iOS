@@ -6,37 +6,12 @@
 //  Copyright © 2019 Divyansh  Jain. All rights reserved.
 //
 
-extension UIImage {
-
-    func maskWithColor(color: UIColor) -> UIImage? {
-        let maskImage = cgImage!
-
-        let width = size.width
-        let height = size.height
-        let bounds = CGRect(x: 0, y: 0, width: width, height: height)
-
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-        let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
-
-        context.clip(to: bounds, mask: maskImage)
-        context.setFillColor(color.cgColor)
-        context.fill(bounds)
-
-        if let cgImage = context.makeImage() {
-            let coloredImage = UIImage(cgImage: cgImage)
-            return coloredImage
-        } else {
-            return nil
-        }
-    }
-
-}
-
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let preferredTextField = UITextField.init(frame: CGRect.zero)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -58,7 +33,6 @@ class ViewController: UIViewController {
         codeforcesText.text = "Codeforces"
         codeforcesText.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
-        let preferredTextField = UITextField.init(frame: CGRect.zero)
         preferredTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(preferredTextField)
         preferredTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
@@ -84,6 +58,13 @@ class ViewController: UIViewController {
         var arrowForwardimage = UIImage(named: "arrow_forward.png")
         arrowForwardimage = arrowForwardimage?.withTintColor(.white)
         submitButton.setImage(arrowForwardimage, for: .normal)
+        submitButton.addTarget(self, action: #selector(openContestList), for: .touchUpInside)
+    }
+    
+    @objc func openContestList() {
+        if (preferredTextField.text != nil) {
+            self.navigationController?.pushViewController(ContestListViewController.init(preferredHandle: preferredTextField.text!), animated: true)
+        }
     }
 }
 
