@@ -9,13 +9,8 @@
 import Foundation
 import UIKit
 
-public protocol DrawerPresentationControllerDelegate: class {
-    func drawerMovedTo(position: DraweSnapPoint)
-}
-
 public enum DraweSnapPoint {
     case top
-    case middle
     case close
 }
 
@@ -27,69 +22,23 @@ public enum DraweSnapPoint {
 
 public class DrawerPresentationController: UIPresentationController {
     
-    /// Optional attributes
-    
-    /// Drawer delegate serves as a notifier for the presenting view controller.
-    /// It will notify when the state (position) of the drawer has changed.
-    /// Sate and position are here described as SnapPoints.
-    public weak var drawerDelegate: DrawerPresentationControllerDelegate?
-    
-    /// Public setable attributes
-    
-    /// Blur effect for the view displayed behind the drawer.
-    ///   -------
-    ///  |...A...|
-    ///  |.......|
-    ///  |.......|    . = Bulrred view
-    ///  |/¯¯¯¯¯\|    A = Presenting
-    ///  |   B   |    B = Presented (Modal)
-    ///  |_______|
     public var blurEffectStyle: UIBlurEffect.Style = .light
-    
-    /// The gap between the top of the modal and the top of the presenting
-    /// view controller.
-    ///   -------
-    ///  |   A   | ¯|
-    ///  |       |  |< this is the top gap
-    ///  |       | _|
-    ///  |/¯¯¯¯¯\|    A = Presenting
-    ///  |   B   |    B = Presented (Modal)
-    ///  |_______|
+
     public var topGap: CGFloat = 88
     
-    /// Modal width, you probably want to change it on an iPad to prevent it
-    /// taking the whole width available.
-    /// 0 = same with of the presenting view controller.
-    ///   -------
-    ///  |   A   |
-    ///  |       |
-    ///  |       |
-    ///  |/¯¯¯¯¯\|    A = Presenting
-    ///  |   B   |    B = Presented (Modal)
-    ///  |_______|
-    ///   ___^___ -> This is the modal width
-    ///              0 = full width
-    public var modalWidth: CGFloat = 0
+    private var modalHeight: CGFloat = 0
     
     /// Toggle the bounce value to allow the modal to bounce when it's being
     /// dragged top, over the max width (add the top gap).
     public var bounce: Bool = false
     
-    /// The modal corners radius.
-    /// The default value is 20 for a minimal yet elegant radius.
-    public var cornerRadius: CGFloat = 20
-    
-    /// Set the modal's corners that should be rounded.
-    /// Defaults are the two top corners.
     public var roundedCorners: UIRectCorner = [.topLeft, .topRight]
     
     /// Frame for the modally presented view.
     override public var frameOfPresentedViewInContainerView: CGRect {
-        return CGRect(origin: CGPoint(x: 0, y: self.containerView!.frame.height/2), size: CGSize(width: (self.modalWidth == 0 ? self.containerView!.frame.width : self.modalWidth), height: self.containerView!.frame.height-self.topGap))
+        modalHeight = (self.containerView!.frame.height / 2) - self.topGap
+        return CGRect(origin: CGPoint(x: 0, y: self.containerView!.frame.height / 4), size: CGSize(width: (self.containerView!.frame.width), height: modalHeight))
     }
-    
-    /// Private Attributes
-    private var currentSnapPoint: DraweSnapPoint = .middle
     
     private lazy var blurEffectView: UIVisualEffectView = {
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: self.blurEffectStyle))
@@ -108,17 +57,12 @@ public class DrawerPresentationController: UIPresentationController {
         return pan
     }()
     
-    /// Initializers
-    /// Init with non required values - defaults are provided.
-    public convenience init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, drawerDelegate: DrawerPresentationControllerDelegate? = nil, blurEffectStyle: UIBlurEffect.Style = .light, topGap: CGFloat = 88, modalWidth: CGFloat = 0, cornerRadius: CGFloat = 20) {
+    public convenience init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, blurEffectStyle: UIBlurEffect.Style = .light, topGap: CGFloat = 88) {
         self.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        self.drawerDelegate = drawerDelegate
         self.blurEffectStyle = blurEffectStyle
         self.topGap = topGap
-        self.modalWidth = modalWidth
-        self.cornerRadius = cornerRadius
     }
-    /// Regular init.
+
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
@@ -147,21 +91,14 @@ public class DrawerPresentationController: UIPresentationController {
         guard let presentedView = self.presentedView else { return }
         
         presentedView.layer.masksToBounds = true
-        presentedView.roundCorners(corners: self.roundedCorners, radius: self.cornerRadius)
+        presentedView.roundCorners(corners: self.roundedCorners, radius: UIConstants.cornerRadius)
         presentedView.addGestureRecognizer(self.panGesture)
     }
     
     override public func containerViewDidLayoutSubviews() {
         super.containerViewDidLayoutSubviews()
         guard let presenterView = self.containerView else { return }
-        guard let presentedView = self.presentedView else { return }
-        
-        // Set the frame and position of the modal
-        presentedView.frame = self.frameOfPresentedViewInContainerView
-        presentedView.frame.origin.x = (presenterView.frame.width - presentedView.frame.width) / 2
-        presentedView.center = CGPoint(x: presentedView.center.x, y: presenterView.center.y * 2)
-        
-        // Set the blur effect frame, behind the modal
+        sendToTop()
         self.blurEffectView.frame = presenterView.bounds
     }
     
@@ -186,21 +123,12 @@ public class DrawerPresentationController: UIPresentationController {
         case .ended:
             let height = self.presentingViewController.view.frame.height
             let position = presentedView.convert(self.presentingViewController.view.frame, to: nil).origin.y
-            if position < 0 || position < (1/4 * height) {
+            if position < (height * 0.75 + CGFloat(self.topGap / 2)) {
                 // TOP SNAP POINT
                 self.sendToTop()
-                self.currentSnapPoint = .top
-            } else if (position < (height / 2)) || (position > (height / 2) && position < (height / 3)) {
-                // MIDDLE SNAP POINT
-                self.sendToMiddle()
-                self.currentSnapPoint = .middle
             } else {
                 // BOTTOM SNAP POINT
-                self.currentSnapPoint = .close
                 self.dismiss()
-            }
-            if let d = self.drawerDelegate {
-                d.drawerMovedTo(position: self.currentSnapPoint)
             }
             gesture.setTranslation(CGPoint.zero, in: self.presentingViewController.view)
         default:
@@ -210,18 +138,9 @@ public class DrawerPresentationController: UIPresentationController {
     
     func sendToTop() {
         guard let presentedView = self.presentedView else { return }
-        let topYPosition: CGFloat = (self.presentingViewController.view.center.y + CGFloat(self.topGap / 2))
+        let topYPosition: CGFloat = (self.presentingViewController.view.frame.height * 0.75 + CGFloat(self.topGap / 2))
         UIView.animate(withDuration: 0.25) {
             presentedView.center = CGPoint(x: presentedView.center.x, y: topYPosition)
-        }
-    }
-    
-    func sendToMiddle() {
-        if let presentedView = self.presentedView {
-            let y = self.presentingViewController.view.center.y * 2
-            UIView.animate(withDuration: 0.25) {
-                presentedView.center = CGPoint(x: presentedView.center.x, y: y)
-            }
         }
     }
 }

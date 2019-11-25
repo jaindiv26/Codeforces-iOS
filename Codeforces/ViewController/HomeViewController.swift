@@ -23,6 +23,7 @@ class HomeViewController:
     var pastContestList:  [GymModel] = []
     let flowLayout = UICollectionViewFlowLayout()
     var collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var bottomSheet: ContestBottomSheetViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,21 +113,23 @@ class HomeViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            presentDrawer()
+            presentDrawer(model: currentContestList[indexPath.row])
             break
         case 1:
-            self.navigationController?.present(WebViewController.init(contestId: pastContestList[indexPath.row].id), animated: true, completion: nil)
+            presentDrawer(model: pastContestList[indexPath.row])
             break
         default:
             break
         }
     }
     
-    func presentDrawer() {
-        let viewController = ContestBottomSheetViewController()
-        viewController.modalPresentationStyle = .custom
-        viewController.transitioningDelegate = self
-        self.present(viewController, animated: true)
+    func presentDrawer(model: GymModel) {
+        bottomSheet = ContestBottomSheetViewController.init(model: model, delegate: self)
+        bottomSheet?.modalPresentationStyle = .custom
+        bottomSheet?.transitioningDelegate = self
+        if let viewController = bottomSheet {
+            self.present(viewController, animated: true)
+        }
     }
     
     
@@ -148,14 +151,17 @@ class HomeViewController:
     
 }
 
-extension HomeViewController: DrawerPresentationControllerDelegate {
-    func drawerMovedTo(position: DraweSnapPoint) {
-        
-    }
-}
-
 extension HomeViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return DrawerPresentationController(presentedViewController: presented, presenting: presenting, blurEffectStyle: .dark)
+    }
+}
+
+extension HomeViewController: OpenContestWebsite {
+    
+    func openContestWebsite(contestId: Int) {
+        bottomSheet?.dismiss(animated: true, completion: {
+            self.navigationController?.present(WebViewController.init(contestId: contestId), animated: true, completion: nil)
+        })
     }
 }
