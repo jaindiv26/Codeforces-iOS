@@ -8,28 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		FC1B42ED2349112600F47522 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B42EC2349112600F47522 /* AppDelegate.swift */; };
-		FC1B42F12349112600F47522 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B42F02349112600F47522 /* ViewController.swift */; };
 		FC1B42F62349112800F47522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1B42F52349112800F47522 /* Assets.xcassets */; };
 		FC1B42F92349112800F47522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1B42F72349112800F47522 /* LaunchScreen.storyboard */; };
+		FCA077CE2373EC0C00D84628 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B42F02349112600F47522 /* UserProfileViewController.swift */; };
+		FCA077CF2373EC1100D84628 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077CC2373E4D600D84628 /* MainTabController.swift */; };
+		FCA077D42374301F00D84628 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077D22373F81E00D84628 /* CardView.swift */; };
+		FCA077D52374302400D84628 /* ContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0FB942354D75600856AB3 /* ContestCell.swift */; };
+		FCA077D72374315000D84628 /* GymViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077D62374315000D84628 /* GymViewController.swift */; };
+		FCA077D9237431E900D84628 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077D8237431E900D84628 /* HomeViewController.swift */; };
+		FCA077DB2374367900D84628 /* GymModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077DA2374367900D84628 /* GymModel.swift */; };
+		FCA077DD237439FD00D84628 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077DC237439FD00D84628 /* Constants.swift */; };
+		FCA077DF2374421A00D84628 /* BaseContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077DE2374421900D84628 /* BaseContestCell.swift */; };
+		FCA077E42374C1D800D84628 /* CustomSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077E32374C1D800D84628 /* CustomSectionView.swift */; };
+		FCA077E62375576100D84628 /* ContestBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA077E52375576100D84628 /* ContestBottomSheetViewController.swift */; };
 		FCB0FB8B2354A1A000856AB3 /* ContestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0FB8A2354A1A000856AB3 /* ContestListViewController.swift */; };
 		FCB0FB902354A24B00856AB3 /* ContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0FB8F2354A24B00856AB3 /* ContestModel.swift */; };
 		FCB0FB922354A2C900856AB3 /* ContestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0FB912354A2C900856AB3 /* ContestViewModel.swift */; };
-		FCB0FB952354D75600856AB3 /* ContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0FB942354D75600856AB3 /* ContestCell.swift */; };
 		FCB0FB972355C50000856AB3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0FB962355C50000856AB3 /* WebViewController.swift */; };
+		FCFE5354238BC47E00C92FD0 /* DrawerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE5353238BC47E00C92FD0 /* DrawerPresentationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FC1B42E92349112600F47522 /* Codeforces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codeforces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1B42EC2349112600F47522 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC1B42F02349112600F47522 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC1B42F02349112600F47522 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		FC1B42F52349112800F47522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC1B42F82349112800F47522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC1B42FA2349112800F47522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCA077CC2373E4D600D84628 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		FCA077D22373F81E00D84628 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		FCA077D62374315000D84628 /* GymViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymViewController.swift; sourceTree = "<group>"; };
+		FCA077D8237431E900D84628 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FCA077DA2374367900D84628 /* GymModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymModel.swift; sourceTree = "<group>"; };
+		FCA077DC237439FD00D84628 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FCA077DE2374421900D84628 /* BaseContestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContestCell.swift; sourceTree = "<group>"; };
+		FCA077E32374C1D800D84628 /* CustomSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSectionView.swift; sourceTree = "<group>"; };
+		FCA077E52375576100D84628 /* ContestBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestBottomSheetViewController.swift; sourceTree = "<group>"; };
 		FCB0FB8A2354A1A000856AB3 /* ContestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestListViewController.swift; sourceTree = "<group>"; };
 		FCB0FB8F2354A24B00856AB3 /* ContestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestModel.swift; sourceTree = "<group>"; };
 		FCB0FB912354A2C900856AB3 /* ContestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestViewModel.swift; sourceTree = "<group>"; };
 		FCB0FB942354D75600856AB3 /* ContestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestCell.swift; sourceTree = "<group>"; };
 		FCB0FB962355C50000856AB3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		FCFE5353238BC47E00C92FD0 /* DrawerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerPresentationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +82,8 @@
 		FC1B42EB2349112600F47522 /* Codeforces */ = {
 			isa = PBXGroup;
 			children = (
+				FCA077D12373F80700D84628 /* UIKit */,
+				FCA077CB2373E4B700D84628 /* TabController */,
 				FCB0FB932354D74100856AB3 /* Cell */,
 				FCB0FB8E2354A23500856AB3 /* Model */,
 				FCB0FB8C2354A1E700856AB3 /* ViewModel */,
@@ -70,6 +92,8 @@
 				FC1B42F52349112800F47522 /* Assets.xcassets */,
 				FC1B42F72349112800F47522 /* LaunchScreen.storyboard */,
 				FC1B42FA2349112800F47522 /* Info.plist */,
+				FCA077DC237439FD00D84628 /* Constants.swift */,
+				FCFE5353238BC47E00C92FD0 /* DrawerPresentationController.swift */,
 			);
 			path = Codeforces;
 			sourceTree = "<group>";
@@ -77,11 +101,31 @@
 		FC1B43002349131400F47522 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FC1B42F02349112600F47522 /* ViewController.swift */,
+				FC1B42F02349112600F47522 /* UserProfileViewController.swift */,
 				FCB0FB8A2354A1A000856AB3 /* ContestListViewController.swift */,
 				FCB0FB962355C50000856AB3 /* WebViewController.swift */,
+				FCA077D62374315000D84628 /* GymViewController.swift */,
+				FCA077D8237431E900D84628 /* HomeViewController.swift */,
+				FCA077E52375576100D84628 /* ContestBottomSheetViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FCA077CB2373E4B700D84628 /* TabController */ = {
+			isa = PBXGroup;
+			children = (
+				FCA077CC2373E4D600D84628 /* MainTabController.swift */,
+			);
+			path = TabController;
+			sourceTree = "<group>";
+		};
+		FCA077D12373F80700D84628 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				FCA077D22373F81E00D84628 /* CardView.swift */,
+				FCA077E32374C1D800D84628 /* CustomSectionView.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		FCB0FB8C2354A1E700856AB3 /* ViewModel */ = {
@@ -96,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				FCB0FB8F2354A24B00856AB3 /* ContestModel.swift */,
+				FCA077DA2374367900D84628 /* GymModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -104,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				FCB0FB942354D75600856AB3 /* ContestCell.swift */,
+				FCA077DE2374421900D84628 /* BaseContestCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -179,10 +225,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCB0FB8B2354A1A000856AB3 /* ContestListViewController.swift in Sources */,
-				FC1B42F12349112600F47522 /* ViewController.swift in Sources */,
-				FCB0FB952354D75600856AB3 /* ContestCell.swift in Sources */,
+				FCA077D42374301F00D84628 /* CardView.swift in Sources */,
+				FCA077D72374315000D84628 /* GymViewController.swift in Sources */,
+				FCA077DB2374367900D84628 /* GymModel.swift in Sources */,
+				FCFE5354238BC47E00C92FD0 /* DrawerPresentationController.swift in Sources */,
+				FCA077CE2373EC0C00D84628 /* UserProfileViewController.swift in Sources */,
+				FCA077CF2373EC1100D84628 /* MainTabController.swift in Sources */,
 				FCB0FB902354A24B00856AB3 /* ContestModel.swift in Sources */,
+				FCA077DD237439FD00D84628 /* Constants.swift in Sources */,
+				FCA077D52374302400D84628 /* ContestCell.swift in Sources */,
+				FCA077E62375576100D84628 /* ContestBottomSheetViewController.swift in Sources */,
+				FCA077DF2374421A00D84628 /* BaseContestCell.swift in Sources */,
+				FCA077D9237431E900D84628 /* HomeViewController.swift in Sources */,
 				FCB0FB972355C50000856AB3 /* WebViewController.swift in Sources */,
+				FCA077E42374C1D800D84628 /* CustomSectionView.swift in Sources */,
 				FC1B42ED2349112600F47522 /* AppDelegate.swift in Sources */,
 				FCB0FB922354A2C900856AB3 /* ContestViewModel.swift in Sources */,
 			);

@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class UserProfileViewController:
+    UIViewController,
+    UITextFieldDelegate
+{
     
     let preferredTextField = UITextField.init(frame: CGRect.zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         let codeforcesLogo = UIImageView.init(frame: CGRect.zero)
         codeforcesLogo.translatesAutoresizingMaskIntoConstraints = false
@@ -41,10 +44,12 @@ class ViewController: UIViewController {
         preferredTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         preferredTextField.layer.cornerRadius =  5
         preferredTextField.layer.borderColor = UIColor.gray.cgColor
+        preferredTextField.backgroundColor = .systemBackground
         preferredTextField.layer.borderWidth = 0.8
         preferredTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
         preferredTextField.leftViewMode = .always
         preferredTextField.placeholder = "Please enter your preferred handle"
+        preferredTextField.delegate = self
         
         let submitButton = UIButton.init(frame: CGRect.zero)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +64,11 @@ class ViewController: UIViewController {
         arrowForwardimage = arrowForwardimage?.withTintColor(.white)
         submitButton.setImage(arrowForwardimage, for: .normal)
         submitButton.addTarget(self, action: #selector(openContestList), for: .touchUpInside)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     @objc func openContestList() {
